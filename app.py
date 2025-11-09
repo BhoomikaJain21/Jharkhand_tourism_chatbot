@@ -14,6 +14,8 @@ from sklearn.linear_model import LogisticRegression
 def load_chatbot_components():
     """Loads all necessary components from saved files."""
     try:
+        nltk.download('punkt', quiet=True) 
+        nltk.download('wordnet', quiet=True)
         # Load the saved model and vectorizer
         with open('chatbot_model.pkl', 'rb') as f:
             model = pickle.load(f)
