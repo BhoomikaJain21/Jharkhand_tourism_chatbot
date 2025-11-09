@@ -4,18 +4,29 @@ import json
 import nltk
 import random
 import numpy as np
+import os 
 from google_trans_new import google_translator
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-# --- 1. SETUP: Load Model and Functions ---
+# --- 1. SETUP: Load Model and Functions (Streamlit Cache) ---
 @st.cache_resource
 def load_chatbot_components():
-    """Loads all necessary components from saved files."""
+    """Loads all necessary components from saved files and ensures NLTK data is available."""
     try:
-        nltk.download('punkt', quiet=True) 
-        nltk.download('wordnet', quiet=True)
+        NLTK_DATA_DIR = "/tmp/nltk_data"
+        if NLTK_DATA_DIR not in nltk.data.path:
+            nltk.data.path.append(NLTK_DATA_DIR)
+        
+        if not os.path.exists(NLTK_DATA_DIR):
+            os.makedirs(NLTK_DATA_DIR)
+
+        nltk.download('punkt', download_dir=NLTK_DATA_DIR, quiet=True) 
+        nltk.download('wordnet', download_dir=NLTK_DATA_DIR, quiet=True) 
+        nltk.download('omw-1.4', download_dir=NLTK_DATA_DIR, quiet=True) 
+        nltk.download('averaged_perceptron_tagger', download_dir=NLTK_DATA_DIR, quiet=True)
+
         # Load the saved model and vectorizer
         with open('chatbot_model.pkl', 'rb') as f:
             model = pickle.load(f)
@@ -34,7 +45,6 @@ def load_chatbot_components():
         
     except FileNotFoundError as e:
         st.error(f"Error loading required files: {e}. Ensure all three files are in the directory.")
-        # Raise an exception to stop execution gracefully
         raise
     except Exception as e:
         st.error(f"An error occurred during component loading: {e}")
@@ -43,7 +53,7 @@ def load_chatbot_components():
 try:
     model, vectorizer, intents_data, lemmatizer, translator = load_chatbot_components()
 except:
-    st.stop() # Stop the Streamlit run if the loading fails
+    st.stop()
 
 # --- 2. CHATBOT LOGIC FUNCTIONS ---
 
@@ -53,13 +63,15 @@ def get_response(intent_tag):
             return random.choice(intent['responses'])
     for intent in intents_data['intents']:
         if intent['tag'] == 'fallback':
-             return random.choice(intent['responses'])
+              return random.choice(intent['responses'])
     return "I am unable to process your request at the moment."
 
 def is_hindi(text):
     return any('\u0900' <= char <= '\u097F' for char in text)
 
 def translate_to_english(text):
+    if not text:
+        return "", 'en'
     try:
         translation = translator.translate(text, dest='en')
         detected_src = translation.src
@@ -92,9 +104,9 @@ def classify_intent(sentence):
     max_proba = np.max(probabilities)
     
     if max_proba >= 0.50:
-         return prediction
+          return prediction
     
-    # Robust Keyword Fallback
+    # Robust Keyword Fallback if confidence is low
     if 'ranchi' in sentence_str or 'raanchi' in sentence_str or 'waterfall' in sentence_str or 'झरनो' in sentence_str or 'रांची' in sentence_str:
         return 'about_ranchi'
     elif 'jamshedpur' in sentence_str or 'steel city' in sentence_str or 'जमशेदपुर' in sentence_str:
@@ -133,7 +145,6 @@ for message in st.session_state.messages:
 
 # Accept user input
 if prompt := st.chat_input("Ask a question about Ranchi, Deoghar, or local culture..."):
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -141,9 +152,12 @@ if prompt := st.chat_input("Ask a question about Ranchi, Deoghar, or local cultu
     # --- Process Chatbot Response ---
     with st.spinner('Thinking...'):
         eng_input, source_lang = translate_to_english(prompt)
-        intent_tag = classify_intent(eng_input)
-        english_response = get_response(intent_tag)
-        final_response = translate_response(english_response, source_lang)
+        if eng_input:
+            intent_tag = classify_intent(eng_input)
+            english_response = get_response(intent_tag)
+            final_response = translate_response(english_response, source_lang)
+        else:
+            final_response = "Please type a message so I can assist you!"
     
     # Display assistant response
     with st.chat_message("assistant"):
