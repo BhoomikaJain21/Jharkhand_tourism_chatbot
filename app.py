@@ -4,7 +4,7 @@ import json
 import nltk
 import random
 import numpy as np
-from googletrans import Translator
+from google_trans_new import google_translator
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -26,7 +26,7 @@ def load_chatbot_components():
 
         # Initialize tools
         lemmatizer = WordNetLemmatizer()
-        translator = Translator()
+        translator = google_translator()
         
         return model, vectorizer, intents_data, lemmatizer, translator
         
