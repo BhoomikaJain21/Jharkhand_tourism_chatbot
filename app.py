@@ -15,11 +15,10 @@ from sklearn.linear_model import LogisticRegression
 def load_chatbot_components():
     """Loads all necessary components from saved files and ensures NLTK data is available."""
     try:
-        # --- CRITICAL FIX: Rely on NLTK's internal path logic ---
-        # When explicit path setting (like /tmp) fails, the simpler download often succeeds.
-        nltk.download('punkt', quiet=True) 
+        # --- CRITICAL FIX: Ensure remaining NLTK data is available ---
+        # We are only downloading resources needed for lemmatization, bypassing 'punkt'
         nltk.download('wordnet', quiet=True) 
-        nltk.download('omw-1.4', quiet=True) # Open Multilingual WordNet
+        nltk.download('omw-1.4', quiet=True) 
         nltk.download('averaged_perceptron_tagger', quiet=True)
         # --------------------------------------------------------
 
@@ -47,7 +46,6 @@ def load_chatbot_components():
         raise
 
 try:
-    # This call now includes the comprehensive NLTK download/setup
     model, vectorizer, intents_data, lemmatizer, translator = load_chatbot_components()
 except:
     st.stop() # Stop the Streamlit run if the loading fails
@@ -88,8 +86,10 @@ def translate_response(text, dest_lang):
         return text 
 
 def classify_intent(sentence):
-    # This requires the 'punkt' resource
-    sentence_words = nltk.word_tokenize(sentence)
+    # CRITICAL FIX: Replaced nltk.word_tokenize with basic split() to bypass the LookupError
+    # This removes the dependency on the failing 'punkt' resource.
+    sentence_words = sentence.split()
+    
     # This requires the 'wordnet' resource
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     sentence_str = " ".join(sentence_words)
