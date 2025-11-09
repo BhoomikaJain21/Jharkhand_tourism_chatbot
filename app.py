@@ -1,5 +1,3 @@
-# app.py (This file will be saved in your Colab environment)
-
 import streamlit as st
 import pickle
 import json
@@ -11,8 +9,7 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-# --- 1. SETUP: Load Model and Functions (Streamlit Cache) ---
-# @st.cache_resource ensures the heavy loading/initialization runs only ONCE.
+# --- 1. SETUP: Load Model and Functions ---
 @st.cache_resource
 def load_chatbot_components():
     """Loads all necessary components from saved files."""
@@ -46,7 +43,7 @@ try:
 except:
     st.stop() # Stop the Streamlit run if the loading fails
 
-# --- 2. CHATBOT LOGIC FUNCTIONS (Must be complete) ---
+# --- 2. CHATBOT LOGIC FUNCTIONS ---
 
 def get_response(intent_tag):
     for intent in intents_data['intents']:
@@ -95,7 +92,7 @@ def classify_intent(sentence):
     if max_proba >= 0.50:
          return prediction
     
-    # Robust Keyword Fallback (Partial list for brevity, ensure all are included)
+    # Robust Keyword Fallback
     if 'ranchi' in sentence_str or 'raanchi' in sentence_str or 'waterfall' in sentence_str or 'झरनो' in sentence_str or 'रांची' in sentence_str:
         return 'about_ranchi'
     elif 'jamshedpur' in sentence_str or 'steel city' in sentence_str or 'जमशेदपुर' in sentence_str:
@@ -124,7 +121,6 @@ st.subheader("Your Multilingual Guide to the Land of Forests! 🌳")
 # Initialize chat history in Streamlit's session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
-    # Add a welcome message from the bot
     st.session_state.messages.append({"role": "assistant", "content": "Hello! Welcome to Jharkhand Tourism. How can I assist you?"})
 
 
