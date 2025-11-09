@@ -15,17 +15,23 @@ from sklearn.linear_model import LogisticRegression
 def load_chatbot_components():
     """Loads all necessary components from saved files and ensures NLTK data is available."""
     try:
+        # --- CRITICAL FIX: Explicitly set NLTK data path to a writable directory ---
+        # This resolves the LookupError by forcing NLTK to use a writable cloud directory.
         NLTK_DATA_DIR = "/tmp/nltk_data"
         if NLTK_DATA_DIR not in nltk.data.path:
             nltk.data.path.append(NLTK_DATA_DIR)
         
+        # Ensure the directory exists before downloading
         if not os.path.exists(NLTK_DATA_DIR):
             os.makedirs(NLTK_DATA_DIR)
 
+        # Ensure all dependencies are downloaded into the new path.
+        # Use download_dir=NLTK_DATA_DIR to force installation into the correct path.
         nltk.download('punkt', download_dir=NLTK_DATA_DIR, quiet=True) 
         nltk.download('wordnet', download_dir=NLTK_DATA_DIR, quiet=True) 
-        nltk.download('omw-1.4', download_dir=NLTK_DATA_DIR, quiet=True) 
+        nltk.download('omw-1.4', download_dir=NLTK_DATA_DIR, quiet=True) # Open Multilingual WordNet
         nltk.download('averaged_perceptron_tagger', download_dir=NLTK_DATA_DIR, quiet=True)
+        # --------------------------------------------------------
 
         # Load the saved model and vectorizer
         with open('chatbot_model.pkl', 'rb') as f:
@@ -45,15 +51,17 @@ def load_chatbot_components():
         
     except FileNotFoundError as e:
         st.error(f"Error loading required files: {e}. Ensure all three files are in the directory.")
+        # If files are missing, raise to stop execution cleanly
         raise
     except Exception as e:
         st.error(f"An error occurred during component loading: {e}")
         raise
 
 try:
+    # This call now includes the comprehensive NLTK download/setup
     model, vectorizer, intents_data, lemmatizer, translator = load_chatbot_components()
 except:
-    st.stop()
+    st.stop() # Stop the Streamlit run if the loading fails
 
 # --- 2. CHATBOT LOGIC FUNCTIONS ---
 
@@ -91,7 +99,9 @@ def translate_response(text, dest_lang):
         return text 
 
 def classify_intent(sentence):
+    # This requires the 'punkt' resource
     sentence_words = nltk.word_tokenize(sentence)
+    # This requires the 'wordnet' resource
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     sentence_str = " ".join(sentence_words)
 
@@ -145,6 +155,7 @@ for message in st.session_state.messages:
 
 # Accept user input
 if prompt := st.chat_input("Ask a question about Ranchi, Deoghar, or local culture..."):
+    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
