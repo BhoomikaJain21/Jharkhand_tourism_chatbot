@@ -114,7 +114,7 @@ def classify_intent(sentence):
     max_proba = np.max(probabilities)
 
     # Use a reasonable confidence threshold
-    if max_proba >= 0.50:
+    if max_proba >= 0.35:
           return prediction
 
     # Fallback logic should operate on the already-lemmatized/tokenized form if possible,
