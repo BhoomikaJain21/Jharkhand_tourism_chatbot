@@ -5,207 +5,31 @@
             "patterns": [
                 "Hi",
                 "Hello",
-                "Hey there",
-                "Good morning",
-                "Namaste",
-                "Greetings",
-                "Hola",
-                "नमस्ते",
-                "नमस्कार",
-                "হ্যালো",
-                "ନମସ୍କାର"
+                "Namaste"
             ],
             "responses": [
-                "Hello! Welcome to Jharkhand Tourism. How can I assist you?",
-                "Namaste! What brings you to Jharkhand?"
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "thanks",
-            "patterns": [
-                "Thank you",
-                "Thanks",
-                "Cheers",
-                "Appreciate it",
-                "Dhanyawad",
-                "शुक्रिया",
-                "ধন্যবাদ",
-                "ଧନ୍ୟବାଦ"
-            ],
-            "responses": [
-                "You're welcome! Happy to help.",
-                "Anytime! Let me know if you need more."
-            ],
-            "language": "en"
+                "Hello! Welcome to Jharkhand."
+            ]
         },
         {
             "tag": "about_ranchi",
             "patterns": [
                 "Tell me about Ranchi",
-                "What to see in Ranchi",
-                "Ranchi tourism spots",
-                "Ranchi waterfalls",
-                "tourist places in Ranchi",
-                "रांची",
-                "রাঁচি"
+                "Ranchi waterfalls"
             ],
             "responses": [
-                "Ranchi, the capital, is known as the 'City of Waterfalls.' Don't miss the Hundru Falls, Jonha Falls, and Ranchi Lake."
-            ],
-            "language": "en"
+                "Ranchi is the City of Waterfalls."
+            ]
         },
         {
-            "tag": "about_jamshedpur",
+            "tag": "thanks",
             "patterns": [
-                "Info on Jamshedpur",
-                "The Steel City",
-                "Jamshedpur sightseeing",
-                "What can I do in Jamshedpur?",
-                "जमशेदपुर",
-                "জামশেদপুর"
+                "Thank you",
+                "Thanks"
             ],
             "responses": [
-                "Jamshedpur, the industrial capital, is home to Tata Steel. Visit the Jubilee Park (inspired by Vrindavan Gardens) and Dalma Hills."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "about_betla",
-            "patterns": [
-                "Where is Betla National Park?",
-                "Betla timings",
-                "Animals in Betla",
-                "Palamau Tiger Reserve",
-                "wildlife in jharkhand",
-                "ବେତଲା",
-                "ବେତଳା"
-            ],
-            "responses": [
-                "Betla National Park is in Latehar district and is famous for tigers, elephants, and beautiful scenery. It's a key wildlife spot."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "about_deoghar",
-            "patterns": [
-                "Tell me about Deoghar",
-                "Baidyanath Dham temple",
-                "Deoghar tourism",
-                "Baba Dham info",
-                "religious places in Jharkhand",
-                "jyotirlinga",
-                "দেওঘর",
-                "ଦେଓଘର"
-            ],
-            "responses": [
-                "Deoghar is home to the famous Baidyanath Jyotirlinga temple (Baba Dham), a major Hindu pilgrimage site."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "about_dhanbad",
-            "patterns": [
-                "Tell me about Dhanbad",
-                "Coal Capital of India",
-                "Dhanbad mines",
-                "What is Dhanbad famous for?",
-                "ଧନବାଦ",
-                "ধানবাদ"
-            ],
-            "responses": [
-                "Dhanbad is known as the 'Coal Capital of India' due to its rich mining industries. Top attractions include Maithon Dam and Topchanchi Lake."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "about_parasnath",
-            "patterns": [
-                "are there jain temples in jharkhand",
-                "Parasnath hill",
-                "jain pilgrimage",
-                "shikharji temple",
-                "পାରସନାଥ পাহাড়",
-                "ପାରସନାଥ",
-                "जैन मंदिर"
-            ],
-            "responses": [
-                "Parasnath Hill (Shikharji) in Giridih is the most important Jain pilgrimage site in Jharkhand and a beautiful scenic point."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "about_hazaribagh",
-            "patterns": [
-                "Hazaribagh tourism",
-                "Hazaribagh places to visit",
-                "Hazaribagh National Park",
-                "হজାରিবাଗ",
-                "ହାଜାରିବାଗ"
-            ],
-            "responses": [
-                "Hazaribagh is famous for its wildlife sanctuary and peaceful nature. Visit the Canary Hill and the Hazaribagh National Park."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "local_cuisine",
-            "patterns": [
-                "What is the local food in Jharkhand?",
-                "famous dishes",
-                "Where can I eat Litti Chokha?",
-                "best food in jharkhand"
-            ],
-            "responses": [
-                "You must try local staples like *Litti Chokha*, *Dhuska* (a deep-fried rice and lentil pancake), and *Handia* (rice beer)."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "art_pithori",
-            "patterns": [
-                "Pithori painting",
-                "art forms in Jharkhand",
-                "traditional art"
-            ],
-            "responses": [
-                "Pithori painting is a beautiful ritualistic art form traditionally practiced by the tribal communities of Jharkhand."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "dance_chhau",
-            "patterns": [
-                "Chhau dance",
-                "famous dance form",
-                "tribal dance in jharkhand"
-            ],
-            "responses": [
-                "Chhau dance, a semi-classical Indian dance with martial and folk traditions, is famous in Seraikela-Kharsawan region."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "transport",
-            "patterns": [
-                "How to travel within Jharkhand?",
-                "Best way to get to Ranchi",
-                "Is there an airport?",
-                "public transport in Jharkhand"
-            ],
-            "responses": [
-                "Jharkhand is well-connected by train and road. The major airport is Birsa Munda Airport (IXR) in Ranchi. Buses and taxis are readily available."
-            ],
-            "language": "en"
-        },
-        {
-            "tag": "fallback",
-            "patterns": [],
-            "responses": [
-                "I am sorry, I do not understand. Could you please rephrase or ask about a specific tourist spot, art, or cuisine in Jharkhand?",
-                "I need more detail. Please ask about a place like Ranchi, Deoghar, or Betla."
-            ],
-            "language": "en"
+                "You're welcome!"
+            ]
         }
     ]
 }
