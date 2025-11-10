@@ -6,10 +6,19 @@ import json
 import nltk
 import random
 import numpy as np
-from google_trans_new import google_translator # CRITICAL FIX: Changed import
+# Using the stable translator library
+from google_trans_new import google_translator
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+
+# --- CRITICAL FIX 1: DEFINE THE TOKENIZER USED IN TRAINING ---
+# This function MUST exist in app.py with the same name as was saved in the .pkl file.
+# It must also match the simple logic (split()) we adopted to avoid the NLTK 'punkt' error.
+lemmatizer = WordNetLemmatizer()
+def get_lemmas_for_training(text):
+    words = text.split()
+    return [lemmatizer.lemmatize(w.lower()) for w in words]
 
 # --- 1. SETUP: Load Model and Functions (Streamlit Cache) ---
 @st.cache_resource
@@ -24,6 +33,7 @@ def load_chatbot_components():
         with open('chatbot_model.pkl', 'rb') as f:
             model = pickle.load(f)
         with open('chatbot_vectorizer.pkl', 'rb') as f:
+            # The vectorizer loading will now successfully find get_lemmas_for_training
             vectorizer = pickle.load(f)
 
         # Load intents data
@@ -31,9 +41,10 @@ def load_chatbot_components():
             intents_data = json.load(f)
 
         # Initialize tools
-        lemmatizer = WordNetLemmatizer()
-        translator = google_translator() # CRITICAL FIX: Initialize the correct class
+        # We don't need to initialize lemmatizer again as it's global for get_lemmas_for_training
+        translator = google_translator() 
 
+        # Note: We return lemmatizer just for consistency in the original functions
         return model, vectorizer, intents_data, lemmatizer, translator
 
     except FileNotFoundError as e:
@@ -46,7 +57,6 @@ def load_chatbot_components():
 try:
     model, vectorizer, intents_data, lemmatizer, translator = load_chatbot_components()
 except:
-    st.error("The application could not start. Please ensure the training files are uploaded correctly.")
     st.stop()
 
 # --- 2. CHATBOT LOGIC FUNCTIONS ---
@@ -67,12 +77,11 @@ def translate_to_english(text):
     if not text:
         return "", 'en'
     try:
-        # The translate method is compatible between the two libraries
-        translation = translator.translate(text, lang_tgt='en') # lang_tgt for google_trans_new
-        # Note: google_trans_new returns the translated text directly, not a translation object
+        # google_trans_new returns the translated text directly
+        translation = translator.translate(text, lang_tgt='en')
         
-        # Use a separate detection step if needed, but for simplicity, rely on the main function
-        detected_src = 'auto' # Assume auto-detection for the source language
+        # We use a placeholder for detected source language
+        detected_src = 'auto' 
         
         if is_hindi(text):
             return translation, 'hi'
@@ -90,13 +99,14 @@ def translate_response(text, dest_lang):
         return text
 
 def classify_intent(sentence):
-    # Tokenization FIX: Uses split() to bypass the 'punkt' NLTK issue
+    # CRITICAL FIX 2: Use the same logic for classification as in the training tokenizer
+    # The split() logic is now defined by the get_lemmas_for_training function used in the model.
+    # Although the saved vectorizer uses get_lemmas_for_training for its internal tokenizer,
+    # we still need to process the input sentence explicitly here for vectorization.
     sentence_words = sentence.split()
-
-    # Lemmatization requires the 'wordnet' resource
     sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     sentence_str = " ".join(sentence_words)
-
+    
     X_test = vectorizer.transform([sentence_str])
     if X_test.nnz == 0:
         return 'fallback'
@@ -108,7 +118,7 @@ def classify_intent(sentence):
     if max_proba >= 0.50:
           return prediction
 
-    # Robust Keyword Fallback
+    # Robust Keyword Fallback... (rest of your logic)
     if 'ranchi' in sentence_str or 'raanchi' in sentence_str or 'waterfall' in sentence_str or 'रांची' in sentence_str:
         return 'about_ranchi'
     elif 'jamshedpur' in sentence_str or 'steel city' in sentence_str or 'जमशेदपुर' in sentence_str:
@@ -130,7 +140,7 @@ def classify_intent(sentence):
 
     return 'fallback'
 
-# --- 3. STREAMLIT UI CODE ---
+# --- 3. STREAMLIT UI CODE (Unchanged) ---
 
 st.set_page_config(page_title="Jharkhand Tourism Chatbot 🤖", layout="centered")
 st.title("🤖 Jharkhand Tourism Chatbot")
