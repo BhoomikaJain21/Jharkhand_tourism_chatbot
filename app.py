@@ -1,4 +1,4 @@
-# app.py (Final Corrected Version for Deployment)
+# app.py (Confidence Refinement for Deployment)
 
 import streamlit as st
 import pickle
@@ -18,7 +18,9 @@ lemmatizer = WordNetLemmatizer()
 
 # CRITICAL FIX: This function MUST be defined globally and MUST match the name 
 # and logic used during the model training process to satisfy the vectorizer loading.
+# It should contain the same tokenization/preprocessing logic used during training.
 def get_lemmas_for_training(text):
+    """Tokenizes and lemmatizes the text, expected by the pickled vectorizer."""
     # This logic (split + lemmatize) must match what was saved in chatbot_vectorizer.pkl
     words = text.split()
     return [lemmatizer.lemmatize(w.lower()) for w in words]
@@ -37,6 +39,7 @@ def load_chatbot_components():
             model = pickle.load(f)
         with open('chatbot_vectorizer.pkl', 'rb') as f:
             # The loading is now successful because get_lemmas_for_training is defined
+            # NOTE: If this still fails, the root cause is often Python/scikit-learn version mismatch.
             vectorizer = pickle.load(f)
 
         # Load intents data
@@ -53,11 +56,13 @@ def load_chatbot_components():
         raise
     except Exception as e:
         st.error(f"An error occurred during component loading: {e}")
+        # A common issue is a Python/library version mismatch when unpickling
+        st.error("Deployment Hint: Check Python/scikit-learn versions used for saving and deploying the model.")
         raise
 
 try:
     model, vectorizer, intents_data, lemmatizer, translator = load_chatbot_components()
-except:
+except Exception:
     # The stop message is defined in the loading function, so we just stop here.
     st.stop()
 
@@ -99,26 +104,27 @@ def translate_response(text, dest_lang):
         return text
 
 def classify_intent(sentence):
-    # CRITICAL FIX 3: Pass the raw sentence directly to the vectorizer.
-    # The vectorizer's internal tokenizer (get_lemmas_for_training) will handle splitting/lemmatization.
-    
-    # First, ensure the sentence is lowercased before vectorizing
     sentence_lower = sentence.lower()
     
+    # 1. Vectorize the input
     X_test = vectorizer.transform([sentence_lower])
     if X_test.nnz == 0:
         return 'fallback'
 
+    # 2. Get prediction and confidence
     prediction = model.predict(X_test)[0]
     probabilities = model.predict_proba(X_test)[0]
     max_proba = np.max(probabilities)
 
-    # Use a reasonable confidence threshold
-    if max_proba >= 0.35:
+    # 3. DEBUGGING HELP (REMOVE THIS LATER IN DEPLOYMENT)
+    # st.sidebar.write(f"Predicted Intent: {prediction}, Confidence: {max_proba:.2f}")
+
+    # 4. Use a slightly lower confidence threshold for deployment stability.
+    # Original: 0.35 -> Lowered to 0.30 to catch borderline predictions
+    if max_proba >= 0.30: # ADJUSTED THRESHOLD
           return prediction
 
-    # Fallback logic should operate on the already-lemmatized/tokenized form if possible,
-    # but here we use the raw lowercased input for robust keyword checks since the main model failed.
+    # 5. Fallback/Keyword Logic (Unchanged but ensures a response if model fails)
     if 'ranchi' in sentence_lower or 'waterfall' in sentence_lower or 'रांची' in sentence_lower:
         return 'about_ranchi'
     elif 'jamshedpur' in sentence_lower or 'steel city' in sentence_lower or 'जमशेदपुर' in sentence_lower:
@@ -144,7 +150,7 @@ def classify_intent(sentence):
 
     return 'fallback'
 
-# --- 3. STREAMLIT UI CODE (Unchanged) ---
+# --- 3. STREAMLIT UI CODE ---
 
 st.set_page_config(page_title="Jharkhand Tourism Chatbot 🤖", layout="centered")
 st.title("🤖 Jharkhand Tourism Chatbot")
