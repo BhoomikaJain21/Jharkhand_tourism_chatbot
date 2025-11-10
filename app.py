@@ -6,7 +6,7 @@ import json
 import nltk
 import random
 import numpy as np
-from googletrans import Translator # Using the correct library specified in requirements.txt
+from google_trans_new import google_translator # CRITICAL FIX: Changed import
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -17,7 +17,6 @@ def load_chatbot_components():
     """Loads all necessary components from saved files and ensures NLTK data is available."""
     try:
         # Ensure necessary NLTK data is available for lemmatization
-        # We avoid 'punkt' as it is the main source of failure.
         nltk.download('wordnet', quiet=True)
         nltk.download('omw-1.4', quiet=True)
 
@@ -33,7 +32,7 @@ def load_chatbot_components():
 
         # Initialize tools
         lemmatizer = WordNetLemmatizer()
-        translator = Translator()
+        translator = google_translator() # CRITICAL FIX: Initialize the correct class
 
         return model, vectorizer, intents_data, lemmatizer, translator
 
@@ -68,11 +67,16 @@ def translate_to_english(text):
     if not text:
         return "", 'en'
     try:
-        translation = translator.translate(text, dest='en')
-        detected_src = translation.src
+        # The translate method is compatible between the two libraries
+        translation = translator.translate(text, lang_tgt='en') # lang_tgt for google_trans_new
+        # Note: google_trans_new returns the translated text directly, not a translation object
+        
+        # Use a separate detection step if needed, but for simplicity, rely on the main function
+        detected_src = 'auto' # Assume auto-detection for the source language
+        
         if is_hindi(text):
-            return translation.text, 'hi'
-        return translation.text, detected_src
+            return translation, 'hi'
+        return translation, detected_src
     except Exception:
         return text, 'en'
 
@@ -80,13 +84,13 @@ def translate_response(text, dest_lang):
     if dest_lang == 'en':
         return text
     try:
-        translation = translator.translate(text, dest=dest_lang)
-        return translation.text
+        translation = translator.translate(text, lang_tgt=dest_lang)
+        return translation
     except Exception:
         return text
 
 def classify_intent(sentence):
-    # CRITICAL FIX: Use basic split() to avoid NLTK 'punkt' resource issues on cloud environments
+    # Tokenization FIX: Uses split() to bypass the 'punkt' NLTK issue
     sentence_words = sentence.split()
 
     # Lemmatization requires the 'wordnet' resource
@@ -104,7 +108,7 @@ def classify_intent(sentence):
     if max_proba >= 0.50:
           return prediction
 
-    # Robust Keyword Fallback - ensure keywords like 'historic' and 'itinerary' are covered
+    # Robust Keyword Fallback
     if 'ranchi' in sentence_str or 'raanchi' in sentence_str or 'waterfall' in sentence_str or 'रांची' in sentence_str:
         return 'about_ranchi'
     elif 'jamshedpur' in sentence_str or 'steel city' in sentence_str or 'जमशेदपुर' in sentence_str:
