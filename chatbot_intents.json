@@ -1,34 +1,90 @@
 {
     "intents": [
         {
-            "tag": "greeting",
-            "patterns": [
-                "Hi",
-                "Hello",
-                "Namaste"
-            ],
+            "state": "Jharkhand",
+            "overview": {
+                "description": "Jharkhand is a state in eastern India known for forests, waterfalls, minerals, and tribal culture.",
+                "capital": "Ranchi",
+                "formation_year": 2000,
+                "region": "Eastern India"
+            },
+            "qa_dataset": [
+                {
+                    "question": "What is Jharkhand famous for?",
+                    "answer": "..."
+                },
+                {
+                    "question": "Which is the capital of Jharkhand?",
+                    "answer": "Ranchi is the capital of Jharkhand."
+                },
+                {
+                    "question": "How to reach Patratu Valley?",
+                    "answer": "Patratu Valley is 40 km from Ranchi and can be reached by car or bus."
+                },
+                {
+                    "question": "What cultural experience can tourists enjoy?",
+                    "answer": "Tourists can enjoy Chhau dance, tribal music, handicrafts, and festivals."
+                },
+                {
+                    "question": "What is the main airport in Jharkhand?",
+                    "answer": "Birsa Munda Airport in Ranchi is the main airport."
+                }
+            ]
+        },
+        {
+            "tag": "fallback",
             "responses": [
-                "Hello! Welcome to Jharkhand."
+                "I'm sorry, I don't understand that. Can you try asking about a specific place in Jharkhand like Ranchi or Betla?",
+                "I need more information. Could you rephrase your question?"
+            ]
+        },
+        {
+            "tag": "greeting",
+            "responses": [
+                "Hello! Welcome to Jharkhand Tourism. How can I assist you?",
+                "Hi there! What can I tell you about Jharkhand?"
             ]
         },
         {
             "tag": "about_ranchi",
-            "patterns": [
-                "Tell me about Ranchi",
-                "Ranchi waterfalls"
-            ],
             "responses": [
-                "Ranchi is the City of Waterfalls."
+                "Ranchi is the capital, known as the city of waterfalls!"
             ]
         },
         {
-            "tag": "thanks",
-            "patterns": [
-                "Thank you",
-                "Thanks"
-            ],
+            "tag": "about_jamshedpur",
             "responses": [
-                "You're welcome!"
+                "Jamshedpur is known as the Steel City of India."
+            ]
+        },
+        {
+            "tag": "about_betla",
+            "responses": [
+                "Betla National Park is famous for its tiger reserve and jungle safaris."
+            ]
+        },
+        {
+            "tag": "about_deoghar",
+            "responses": [
+                "Deoghar is home to Baidyanath Dham, one of the 12 Jyotirlingas."
+            ]
+        },
+        {
+            "tag": "about_parasnath",
+            "responses": [
+                "Parasnath Hill is a major Jain pilgrimage center (Shikharji)."
+            ]
+        },
+        {
+            "tag": "local_cuisine",
+            "responses": [
+                "Jharkhand is known for dishes like Dhuska, Litti Chokha, and Thekua."
+            ]
+        },
+        {
+            "tag": "transport",
+            "responses": [
+                "The main airport is Birsa Munda Airport in Ranchi."
             ]
         }
     ]
