@@ -1,90 +1,139 @@
 {
     "intents": [
         {
-            "state": "Jharkhand",
-            "overview": {
-                "description": "Jharkhand is a state in eastern India known for forests, waterfalls, minerals, and tribal culture.",
-                "capital": "Ranchi",
-                "formation_year": 2000,
-                "region": "Eastern India"
-            },
-            "qa_dataset": [
-                {
-                    "question": "What is Jharkhand famous for?",
-                    "answer": "..."
-                },
-                {
-                    "question": "Which is the capital of Jharkhand?",
-                    "answer": "Ranchi is the capital of Jharkhand."
-                },
-                {
-                    "question": "How to reach Patratu Valley?",
-                    "answer": "Patratu Valley is 40 km from Ranchi and can be reached by car or bus."
-                },
-                {
-                    "question": "What cultural experience can tourists enjoy?",
-                    "answer": "Tourists can enjoy Chhau dance, tribal music, handicrafts, and festivals."
-                },
-                {
-                    "question": "What is the main airport in Jharkhand?",
-                    "answer": "Birsa Munda Airport in Ranchi is the main airport."
-                }
+            "tag": "overview",
+            "patterns": [
+                "What is Jharkhand famous for?",
+                "What is the major climate type of Jharkhand?",
+                "Which is the best time to visit Jharkhand?",
+                "What is famous in Netarhat?"
+            ],
+            "responses": [
+                "Jharkhand is famous for its waterfalls, forests, minerals, and tribal culture.",
+                "Jharkhand has a tropical climate with hot summers and monsoon rainfall.",
+                "October to March is the best time to visit Jharkhand.",
+                "Netarhat is known for sunrise and sunset points and is called the Queen of Chotanagpur."
             ]
         },
         {
-            "tag": "fallback",
+            "tag": "about_ranchi",
+            "patterns": [
+                "Which is the capital of Jharkhand?",
+                "What are popular waterfalls in Jharkhand?",
+                "Which river flows through Ranchi?",
+                "What is the main airport in Jharkhand?"
+            ],
             "responses": [
-                "I'm sorry, I don't understand that. Can you try asking about a specific place in Jharkhand like Ranchi or Betla?",
-                "I need more information. Could you rephrase your question?"
+                "Ranchi is the capital of Jharkhand.",
+                "Famous waterfalls include Dassam Falls, Hundru Falls, and Jonha Falls.",
+                "The Subarnarekha River flows through Ranchi.",
+                "Birsa Munda Airport in Ranchi is the main airport."
+            ]
+        },
+        {
+            "tag": "religious_places",
+            "patterns": [
+                "Where is Parasnath Hill located?",
+                "Which are popular religious sites?",
+                "What is Baidyanath Dham famous for?",
+                "Does Jharkhand have hill stations?"
+            ],
+            "responses": [
+                "Parasnath Hill is located in Giridih district and is the highest point in Jharkhand.",
+                "Baidyanath Dham, Parasnath Temple, Angrabadi Temple, and Jagannath Temple are popular religious places.",
+                "Baidyanath Dham in Deoghar is one of the 12 Jyotirlingas in India.",
+                "Yes, Netarhat is a popular hill station."
+            ]
+        },
+        {
+            "tag": "about_betla",
+            "patterns": [
+                "What is special about Betla National Park?",
+                "Which wildlife can be seen in Betla?"
+            ],
+            "responses": [
+                "Betla National Park is one of India’s first tiger reserves and offers rich wildlife and jungle safaris.",
+                "Elephants, tigers, leopards, bison, and deer can be seen in Betla."
+            ]
+        },
+        {
+            "tag": "financial_info",
+            "patterns": [
+                "Which industries are strong in Jharkhand?",
+                "What are major minerals found in Jharkhand?"
+            ],
+            "responses": [
+                "Mining, steel, cement, and power generation are major industries.",
+                "Coal, iron ore, mica, copper, and uranium are major minerals."
+            ]
+        },
+        {
+            "tag": "local_cuisine",
+            "patterns": [
+                "What food is Jharkhand known for?"
+            ],
+            "responses": [
+                "Jharkhand is known for dishes like Dhuska, Litti Chokha, Rugra, Handia, and Thekua."
+            ]
+        },
+        {
+            "tag": "adventure_activities",
+            "patterns": [
+                "What adventure activities can tourists do?"
+            ],
+            "responses": [
+                "Tourists can trek, go boating, enjoy jungle safaris, and hike on hills."
+            ]
+        },
+        {
+            "tag": "general_info",
+            "patterns": [
+                "How to reach Patratu Valley?",
+                "Is Jharkhand safe for tourism?",
+                "What languages are spoken in Jharkhand?",
+                "What cultural experience can tourists enjoy?"
+            ],
+            "responses": [
+                "Patratu Valley is 40 km from Ranchi and can be reached by car or bus.",
+                "Yes, Jharkhand is safe for tourism, especially in popular tourist areas.",
+                "Hindi, Nagpuri, Santhali, Ho, and Mundari are widely spoken.",
+                "Tourists can enjoy Chhau dance, tribal music, handicrafts, and festivals."
+            ]
+        },
+        {
+            "tag": "about_jamshedpur",
+            "patterns": [
+                "Which city is known for steel production?"
+            ],
+            "responses": [
+                "Jamshedpur is known as the Steel City of India."
             ]
         },
         {
             "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "Hello",
+                "Is anyone there?",
+                "Namaste",
+                "hey"
+            ],
             "responses": [
                 "Hello! Welcome to Jharkhand Tourism. How can I assist you?",
                 "Hi there! What can I tell you about Jharkhand?"
             ]
         },
         {
-            "tag": "about_ranchi",
+            "tag": "fallback",
+            "patterns": [
+                "I do not know",
+                "nothing",
+                "general query",
+                "random text"
+            ],
             "responses": [
-                "Ranchi is the capital, known as the city of waterfalls!"
-            ]
-        },
-        {
-            "tag": "about_jamshedpur",
-            "responses": [
-                "Jamshedpur is known as the Steel City of India."
-            ]
-        },
-        {
-            "tag": "about_betla",
-            "responses": [
-                "Betla National Park is famous for its tiger reserve and jungle safaris."
-            ]
-        },
-        {
-            "tag": "about_deoghar",
-            "responses": [
-                "Deoghar is home to Baidyanath Dham, one of the 12 Jyotirlingas."
-            ]
-        },
-        {
-            "tag": "about_parasnath",
-            "responses": [
-                "Parasnath Hill is a major Jain pilgrimage center (Shikharji)."
-            ]
-        },
-        {
-            "tag": "local_cuisine",
-            "responses": [
-                "Jharkhand is known for dishes like Dhuska, Litti Chokha, and Thekua."
-            ]
-        },
-        {
-            "tag": "transport",
-            "responses": [
-                "The main airport is Birsa Munda Airport in Ranchi."
+                "I'm sorry, I don't understand that. Can you try asking about a specific place in Jharkhand?",
+                "I need more information. Could you rephrase your question?"
             ]
         }
     ]
