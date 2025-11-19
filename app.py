@@ -26,13 +26,12 @@ def load_chatbot_components():
         with open('chatbot_intents.json', 'r', encoding='utf-8') as f:
             intents_data = json.load(f)
 
-        # The ALL_PATTERNS and ALL_RESPONSES lists are not used in the V4 logic but are kept for caching
         all_patterns = []
         all_responses = []
         for intent in intents_data['intents']:
             if intent['tag'] not in ['fallback']: 
                 all_patterns.extend(intent['patterns'])
-                all_responses.extend(intent['responses']) # Use all responses for simplicity
+                all_responses.extend(intent['responses']) 
 
         lemmatizer = WordNetLemmatizer()
         translator = google_translator()
@@ -72,6 +71,7 @@ def translate_to_english(text):
 
         return translation, detected_src or 'en'
     except Exception:
+        # Fallback to original text in case of translation error
         return text, 'en'
 
 def translate_response(text, dest_lang):
@@ -90,22 +90,18 @@ def get_best_response_by_similarity(user_input_en, intents_data, model, vectoriz
     response from that intent's pool for high confidence questions.
     """
     
-    # 1. Process and Vectorize User Input (Crucial for consistent features)
     words = user_input_en.split()
     lemmatized_input = " ".join([lemmatizer.lemmatize(word.lower()) for word in words])
     
     user_vec = vectorizer.transform([lemmatized_input])
     
-    # 2. Predict the Intent Tag
     try:
         predicted_tag = model.predict(user_vec)[0]
-        # Get the confidence score for the predicted tag
         confidence_score = model.predict_proba(user_vec).max()
     except Exception:
         predicted_tag = 'fallback'
         confidence_score = 0.0
 
-    # 3. Retrieve Intent Data and Response
     tag_responses = []
     
     for intent in intents_data['intents']:
@@ -113,16 +109,15 @@ def get_best_response_by_similarity(user_input_en, intents_data, model, vectoriz
              tag_responses = intent['responses']
              break
 
-    # 4. Return the response based on tag type and confidence
+    # Utility intents (greeting, farewell, thanks, out_of_scope) should always return a response
     if predicted_tag in ['greeting', 'farewell', 'thanks', 'out_of_scope']:
-         # Always return a response for utility intents
          return random.choice(tag_responses)
 
     if confidence_score >= threshold and tag_responses:
-        # Use random choice for tourism intents to prevent index mismatch issues (FIX)
+        # Return a random response from the high-confidence predicted intent
         return random.choice(tag_responses)
     else:
-        # If score is too low or intent is fallback
+        # Fallback if confidence is too low
         for intent in intents_data['intents']:
             if intent['tag'] == 'fallback':
                 return random.choice(intent['responses'])
@@ -152,7 +147,6 @@ if prompt := st.chat_input("Ask a question about Jharkhand tourism..."):
     with st.spinner('Finding the best answer...'):
         eng_input, source_lang = translate_to_english(prompt)
 
-        # Pass only necessary components
         english_response = get_best_response_by_similarity(
             eng_input, 
             intents_data, 
