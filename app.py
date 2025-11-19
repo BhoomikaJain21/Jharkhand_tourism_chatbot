@@ -130,7 +130,7 @@ def get_best_response_by_similarity(user_input_en, patterns, responses, threshol
 
 # --- 3. STREAMLIT UI CODE ---
 st.set_page_config(page_title="Jharkhand Tourism Chatbot 🤖", layout="centered")
-st.title("🤖 Jharkhand Tourism Chatbot (V2: Improved Logic)")
+st.title("🤖 Jharkhand Tourism Chatbot")
 st.subheader("Your Multilingual Guide to the Land of Forests! 🌳")
 
 # Initialize chat history
