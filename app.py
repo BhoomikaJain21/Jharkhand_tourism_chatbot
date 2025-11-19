@@ -4,8 +4,7 @@ import json
 import nltk
 import random
 import numpy as np
-import re
-from google_trans_new import google_translator 
+from google_trans_new import google_translator
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -15,24 +14,31 @@ from sklearn.linear_model import LogisticRegression
 def load_chatbot_components():
     """Loads all necessary components from saved files."""
     try:
+        # Download NLTK resources needed for lemmatization
         nltk.download('wordnet', quiet=True)
         nltk.download('omw-1.4', quiet=True)
 
+        # Load the saved model and vectorizer
         with open('chatbot_model.pkl', 'rb') as f:
             model = pickle.load(f)
         with open('chatbot_vectorizer.pkl', 'rb') as f:
             vectorizer = pickle.load(f)
 
+        # Load intents data (responses)
         with open('chatbot_intents.json', 'r', encoding='utf-8') as f:
             intents_data = json.load(f)
 
+        # Extract all available patterns (questions) and their corresponding answers
+        # This creates a flat list of all questions and a parallel list of all possible responses
         all_patterns = []
         all_responses = []
         for intent in intents_data['intents']:
-            if intent['tag'] not in ['fallback']: 
-                all_patterns.extend(intent['patterns'])
-                all_responses.extend(intent['responses']) 
+            if intent['tag'] not in ['greeting', 'fallback']:
+                for pattern, response in zip(intent['patterns'], intent['responses']):
+                    all_patterns.append(pattern)
+                    all_responses.append(response)
 
+        # Initialize tools
         lemmatizer = WordNetLemmatizer()
         translator = google_translator()
 
@@ -62,16 +68,14 @@ def translate_to_english(text):
     if not text:
         return "", 'en'
     try:
-        cleaned_text = re.sub(r'[^\w\s\u0900-\u097F]', '', text)
-        translation = translator.translate(cleaned_text, lang_tgt='en')
-        detected_src = translator.detect(cleaned_text)
+        translation = translator.translate(text, lang_tgt='en')
+        detected_src = translator.detect(text)
 
-        if is_hindi(cleaned_text) or detected_src == 'hi':
+        if is_hindi(text) or detected_src == 'hi':
             return translation, 'hi'
 
         return translation, detected_src or 'en'
     except Exception:
-        # Fallback to original text in case of translation error
         return text, 'en'
 
 def translate_response(text, dest_lang):
@@ -82,83 +86,83 @@ def translate_response(text, dest_lang):
         translation = translator.translate(text, lang_src='en', lang_tgt=dest_lang)
         return translation
     except Exception:
-        return text 
+        return text
 
-def get_best_response_by_similarity(user_input_en, intents_data, model, vectorizer, lemmatizer, threshold=0.3):
+def get_best_response_by_similarity(user_input_en, patterns, responses, threshold=0.2):
     """
-    Finds the best answer by predicting the intent and then using a random 
-    response from that intent's pool for high confidence questions.
+    Finds the best answer by comparing the user's input against ALL known questions
+    using the model's vectorizer for semantic similarity.
     """
-    
-    words = user_input_en.split()
-    lemmatized_input = " ".join([lemmatizer.lemmatize(word.lower()) for word in words])
-    
-    user_vec = vectorizer.transform([lemmatized_input])
-    
-    try:
-        predicted_tag = model.predict(user_vec)[0]
-        confidence_score = model.predict_proba(user_vec).max()
-    except Exception:
-        predicted_tag = 'fallback'
-        confidence_score = 0.0
+    # 1. Check for greeting first
+    if 'hi' in user_input_en.lower() or 'hello' in user_input_en.lower() or 'hey' in user_input_en.lower():
+        for intent in intents_data['intents']:
+             if intent['tag'] == 'greeting':
+                 return random.choice(intent['responses'])
 
-    tag_responses = []
-    
-    for intent in intents_data['intents']:
-         if intent['tag'] == predicted_tag:
-             tag_responses = intent['responses']
-             break
+    # 2. Vectorize the user's input
+    user_vec = vectorizer.transform([user_input_en])
 
-    # Utility intents (greeting, farewell, thanks, out_of_scope) should always return a response
-    if predicted_tag in ['greeting', 'farewell', 'thanks', 'out_of_scope']:
-         return random.choice(tag_responses)
+    # 3. Vectorize all known patterns (questions) if not already done.
+    # NOTE: In a real environment, you should pre-calculate pattern vectors.
+    # Here, we transform the training data (patterns) used by the model
+    pattern_vecs = vectorizer.transform(patterns)
 
-    if confidence_score >= threshold and tag_responses:
-        # Return a random response from the high-confidence predicted intent
-        return random.choice(tag_responses)
+    # 4. Calculate similarity (dot product between user input and all patterns)
+    # This gives us a similarity score (cosine or TF-IDF product)
+    similarity_scores = user_vec.dot(pattern_vecs.transpose()).toarray()[0]
+
+    # 5. Find the index of the highest similarity score
+    best_match_index = np.argmax(similarity_scores)
+    best_score = similarity_scores[best_match_index]
+
+    # 6. Return the corresponding response if the score is above the threshold
+    if best_score > threshold:
+        # Using the actual answer corresponding to the best matching question
+        return responses[best_match_index]
     else:
-        # Fallback if confidence is too low
+        # If no good match, use the fallback response
         for intent in intents_data['intents']:
             if intent['tag'] == 'fallback':
                 return random.choice(intent['responses'])
 
-    return "I am currently unable to process your specific question. Please try asking a different way."
+    return "I am unable to process your request at the moment."
 
 
 # --- 3. STREAMLIT UI CODE ---
 st.set_page_config(page_title="Jharkhand Tourism Chatbot 🤖", layout="centered")
-st.title("🤖 Jharkhand Tourism Guide")
-st.subheader("Your Multilingual Helper for the Land of Forests! 🌳")
+st.title("🤖 Jharkhand Tourism Chatbot (V2: Improved Logic)")
+st.subheader("Your Multilingual Guide to the Land of Forests! 🌳")
 
+# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
-    initial_message = "Hello! Welcome to Jharkhand Tourism. I can tell you about popular places, waterfalls, culture, food, and more. Feel free to ask in English or Hindi!"
-    st.session_state.messages.append({"role": "assistant", "content": initial_message})
+    st.session_state.messages.append({"role": "assistant", "content": "Hello! Welcome to Jharkhand Tourism. I now provide much more specific answers. Ask me, for example: **'What is the capital of Jharkhand?'** or **'Jharkhand ki rajdhani kya hai?'**"})
 
+# Display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("Ask a question about Jharkhand tourism..."):
+# Handle user input
+if prompt := st.chat_input("Ask a question..."):
+    # Display user message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    with st.spinner('Finding the best answer...'):
+    with st.spinner('Thinking...'):
+        # 1. Translate user prompt to English and get the source language code
         eng_input, source_lang = translate_to_english(prompt)
 
-        english_response = get_best_response_by_similarity(
-            eng_input, 
-            intents_data, 
-            model, 
-            vectorizer, 
-            lemmatizer, 
-            threshold=0.3
-        )
+        # 2. Get the response based on vector similarity against ALL patterns (V2 Logic)
+        english_response = get_best_response_by_similarity(eng_input, ALL_PATTERNS, ALL_RESPONSES)
 
+        # 3. Translate the English response back to the user's source language
         final_response = translate_response(english_response, source_lang)
 
+    # Display assistant response
     with st.chat_message("assistant"):
         st.markdown(final_response)
 
+    # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": final_response})
