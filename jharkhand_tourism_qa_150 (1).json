@@ -1,0 +1,752 @@
+[
+    {
+        "id": 1,
+        "question": "What are the best tourist places in Jharkhand?",
+        "answer": "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites."
+    },
+    {
+        "id": 2,
+        "question": "What is Jharkhand famous for?",
+        "answer": "Jharkhand is famous for waterfalls, forests, rich minerals, and tribal culture."
+    },
+    {
+        "id": 3,
+        "question": "Which waterfall in Jharkhand is most popular?",
+        "answer": "Hundru Falls and Dassam Falls are among the most popular waterfalls."
+    },
+    {
+        "id": 4,
+        "question": "Where is Dassam Falls located?",
+        "answer": "Dassam Falls is located near Taimara village, around 40 km from Ranchi."
+    },
+    {
+        "id": 5,
+        "question": "What is the best time to visit Jharkhand?",
+        "answer": "The best time to visit Jharkhand is from October to March."
+    },
+    {
+        "id": 6,
+        "question": "Which national parks can I visit in Jharkhand?",
+        "answer": "You can visit Betla National Park, Dalma Wildlife Sanctuary, and Hazaribagh Wildlife Sanctuary."
+    },
+    {
+        "id": 7,
+        "question": "What is special about Betla National Park?",
+        "answer": "Betla National Park is known for tigers, elephants, and dense forests."
+    },
+    {
+        "id": 8,
+        "question": "How can I reach Netarhat from Ranchi?",
+        "answer": "You can reach Netarhat by road from Ranchi via Latehar."
+    },
+    {
+        "id": 9,
+        "question": "Is Jharkhand safe for tourists?",
+        "answer": "Yes, Jharkhand is generally safe for tourists with standard precautions."
+    },
+    {
+        "id": 10,
+        "question": "What is the capital of Jharkhand?",
+        "answer": "The capital of Jharkhand is Ranchi."
+    },
+    {
+        "id": 11,
+        "question": "Which is the highest peak in Jharkhand?",
+        "answer": "Parasnath Hill is the highest peak in Jharkhand."
+    },
+    {
+        "id": 12,
+        "question": "What is Parasnath Hill famous for?",
+        "answer": "Parasnath Hill is a famous Jain pilgrimage site."
+    },
+    {
+        "id": 13,
+        "question": "Which tribe is most common in Jharkhand?",
+        "answer": "The Santhal tribe is one of the major tribes in Jharkhand."
+    },
+    {
+        "id": 14,
+        "question": "What are traditional Jharkhand foods?",
+        "answer": "Popular foods include Dhuska, Rugra, Chhoti Macher Jhor, and Chilka Roti."
+    },
+    {
+        "id": 15,
+        "question": "What is the dance form of Jharkhand?",
+        "answer": "Chhau and Jhumair are popular dance forms of Jharkhand."
+    },
+    {
+        "id": 16,
+        "question": "Which river flows through Ranchi?",
+        "answer": "The Subarnarekha River flows through Ranchi."
+    },
+    {
+        "id": 17,
+        "question": "What is the climate of Jharkhand?",
+        "answer": "Jharkhand has a tropical climate with hot summers and cool winters."
+    },
+    {
+        "id": 18,
+        "question": "Which wildlife sanctuary is near Jamshedpur?",
+        "answer": "Dalma Wildlife Sanctuary is the nearest major sanctuary to Jamshedpur."
+    },
+    {
+        "id": 19,
+        "question": "Where is Dalma Wildlife Sanctuary located?",
+        "answer": "Dalma Wildlife Sanctuary is near Jamshedpur, famous for elephants."
+    },
+    {
+        "id": 20,
+        "question": "What is Johna Falls also known as?",
+        "answer": "Johna Falls is also called Gautamdhara Falls."
+    },
+    {
+        "id": 21,
+        "question": "What adventure activities are available in Jharkhand?",
+        "answer": "Adventure activities include trekking, rock climbing, wildlife safari, and boating."
+    },
+    {
+        "id": 22,
+        "question": "Where can I do trekking in Jharkhand?",
+        "answer": "Trekking is popular in Parasnath Hills and Netarhat."
+    },
+    {
+        "id": 23,
+        "question": "Which airport is closest to major attractions?",
+        "answer": "Birsa Munda Airport in Ranchi is the main airport for tourists."
+    },
+    {
+        "id": 24,
+        "question": "Where is Patratu Valley located?",
+        "answer": "Patratu Valley is located near Ramgarh, close to Ranchi."
+    },
+    {
+        "id": 25,
+        "question": "Which city is known as the Steel City of Jharkhand?",
+        "answer": "Jamshedpur is known as the Steel City of Jharkhand."
+    },
+    {
+        "id": 26,
+        "question": "What are the best tourist places in Jharkhand?",
+        "answer": "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites."
+    },
+    {
+        "id": 27,
+        "question": "What is Jharkhand famous for?",
+        "answer": "Jharkhand is famous for waterfalls, forests, rich minerals, and tribal culture."
+    },
+    {
+        "id": 28,
+        "question": "Which waterfall in Jharkhand is most popular?",
+        "answer": "Hundru Falls and Dassam Falls are among the most popular waterfalls."
+    },
+    {
+        "id": 29,
+        "question": "Where is Dassam Falls located?",
+        "answer": "Dassam Falls is located near Taimara village, around 40 km from Ranchi."
+    },
+    {
+        "id": 30,
+        "question": "What is the best time to visit Jharkhand?",
+        "answer": "The best time to visit Jharkhand is from October to March."
+    },
+    {
+        "id": 31,
+        "question": "Which national parks can I visit in Jharkhand?",
+        "answer": "You can visit Betla National Park, Dalma Wildlife Sanctuary, and Hazaribagh Wildlife Sanctuary."
+    },
+    {
+        "id": 32,
+        "question": "What is special about Betla National Park?",
+        "answer": "Betla National Park is known for tigers, elephants, and dense forests."
+    },
+    {
+        "id": 33,
+        "question": "How can I reach Netarhat from Ranchi?",
+        "answer": "You can reach Netarhat by road from Ranchi via Latehar."
+    },
+    {
+        "id": 34,
+        "question": "Is Jharkhand safe for tourists?",
+        "answer": "Yes, Jharkhand is generally safe for tourists with standard precautions."
+    },
+    {
+        "id": 35,
+        "question": "What is the capital of Jharkhand?",
+        "answer": "The capital of Jharkhand is Ranchi."
+    },
+    {
+        "id": 36,
+        "question": "Which is the highest peak in Jharkhand?",
+        "answer": "Parasnath Hill is the highest peak in Jharkhand."
+    },
+    {
+        "id": 37,
+        "question": "What is Parasnath Hill famous for?",
+        "answer": "Parasnath Hill is a famous Jain pilgrimage site."
+    },
+    {
+        "id": 38,
+        "question": "Which tribe is most common in Jharkhand?",
+        "answer": "The Santhal tribe is one of the major tribes in Jharkhand."
+    },
+    {
+        "id": 39,
+        "question": "What are traditional Jharkhand foods?",
+        "answer": "Popular foods include Dhuska, Rugra, Chhoti Macher Jhor, and Chilka Roti."
+    },
+    {
+        "id": 40,
+        "question": "What is the dance form of Jharkhand?",
+        "answer": "Chhau and Jhumair are popular dance forms of Jharkhand."
+    },
+    {
+        "id": 41,
+        "question": "Which river flows through Ranchi?",
+        "answer": "The Subarnarekha River flows through Ranchi."
+    },
+    {
+        "id": 42,
+        "question": "What is the climate of Jharkhand?",
+        "answer": "Jharkhand has a tropical climate with hot summers and cool winters."
+    },
+    {
+        "id": 43,
+        "question": "Which wildlife sanctuary is near Jamshedpur?",
+        "answer": "Dalma Wildlife Sanctuary is the nearest major sanctuary to Jamshedpur."
+    },
+    {
+        "id": 44,
+        "question": "Where is Dalma Wildlife Sanctuary located?",
+        "answer": "Dalma Wildlife Sanctuary is near Jamshedpur, famous for elephants."
+    },
+    {
+        "id": 45,
+        "question": "What is Johna Falls also known as?",
+        "answer": "Johna Falls is also called Gautamdhara Falls."
+    },
+    {
+        "id": 46,
+        "question": "What adventure activities are available in Jharkhand?",
+        "answer": "Adventure activities include trekking, rock climbing, wildlife safari, and boating."
+    },
+    {
+        "id": 47,
+        "question": "Where can I do trekking in Jharkhand?",
+        "answer": "Trekking is popular in Parasnath Hills and Netarhat."
+    },
+    {
+        "id": 48,
+        "question": "Which airport is closest to major attractions?",
+        "answer": "Birsa Munda Airport in Ranchi is the main airport for tourists."
+    },
+    {
+        "id": 49,
+        "question": "Where is Patratu Valley located?",
+        "answer": "Patratu Valley is located near Ramgarh, close to Ranchi."
+    },
+    {
+        "id": 50,
+        "question": "Which city is known as the Steel City of Jharkhand?",
+        "answer": "Jamshedpur is known as the Steel City of Jharkhand."
+    },
+    {
+        "id": 51,
+        "question": "What are the best tourist places in Jharkhand?",
+        "answer": "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites."
+    },
+    {
+        "id": 52,
+        "question": "What is Jharkhand famous for?",
+        "answer": "Jharkhand is famous for waterfalls, forests, rich minerals, and tribal culture."
+    },
+    {
+        "id": 53,
+        "question": "Which waterfall in Jharkhand is most popular?",
+        "answer": "Hundru Falls and Dassam Falls are among the most popular waterfalls."
+    },
+    {
+        "id": 54,
+        "question": "Where is Dassam Falls located?",
+        "answer": "Dassam Falls is located near Taimara village, around 40 km from Ranchi."
+    },
+    {
+        "id": 55,
+        "question": "What is the best time to visit Jharkhand?",
+        "answer": "The best time to visit Jharkhand is from October to March."
+    },
+    {
+        "id": 56,
+        "question": "Which national parks can I visit in Jharkhand?",
+        "answer": "You can visit Betla National Park, Dalma Wildlife Sanctuary, and Hazaribagh Wildlife Sanctuary."
+    },
+    {
+        "id": 57,
+        "question": "What is special about Betla National Park?",
+        "answer": "Betla National Park is known for tigers, elephants, and dense forests."
+    },
+    {
+        "id": 58,
+        "question": "How can I reach Netarhat from Ranchi?",
+        "answer": "You can reach Netarhat by road from Ranchi via Latehar."
+    },
+    {
+        "id": 59,
+        "question": "Is Jharkhand safe for tourists?",
+        "answer": "Yes, Jharkhand is generally safe for tourists with standard precautions."
+    },
+    {
+        "id": 60,
+        "question": "What is the capital of Jharkhand?",
+        "answer": "The capital of Jharkhand is Ranchi."
+    },
+    {
+        "id": 61,
+        "question": "Which is the highest peak in Jharkhand?",
+        "answer": "Parasnath Hill is the highest peak in Jharkhand."
+    },
+    {
+        "id": 62,
+        "question": "What is Parasnath Hill famous for?",
+        "answer": "Parasnath Hill is a famous Jain pilgrimage site."
+    },
+    {
+        "id": 63,
+        "question": "Which tribe is most common in Jharkhand?",
+        "answer": "The Santhal tribe is one of the major tribes in Jharkhand."
+    },
+    {
+        "id": 64,
+        "question": "What are traditional Jharkhand foods?",
+        "answer": "Popular foods include Dhuska, Rugra, Chhoti Macher Jhor, and Chilka Roti."
+    },
+    {
+        "id": 65,
+        "question": "What is the dance form of Jharkhand?",
+        "answer": "Chhau and Jhumair are popular dance forms of Jharkhand."
+    },
+    {
+        "id": 66,
+        "question": "Which river flows through Ranchi?",
+        "answer": "The Subarnarekha River flows through Ranchi."
+    },
+    {
+        "id": 67,
+        "question": "What is the climate of Jharkhand?",
+        "answer": "Jharkhand has a tropical climate with hot summers and cool winters."
+    },
+    {
+        "id": 68,
+        "question": "Which wildlife sanctuary is near Jamshedpur?",
+        "answer": "Dalma Wildlife Sanctuary is the nearest major sanctuary to Jamshedpur."
+    },
+    {
+        "id": 69,
+        "question": "Where is Dalma Wildlife Sanctuary located?",
+        "answer": "Dalma Wildlife Sanctuary is near Jamshedpur, famous for elephants."
+    },
+    {
+        "id": 70,
+        "question": "What is Johna Falls also known as?",
+        "answer": "Johna Falls is also called Gautamdhara Falls."
+    },
+    {
+        "id": 71,
+        "question": "What adventure activities are available in Jharkhand?",
+        "answer": "Adventure activities include trekking, rock climbing, wildlife safari, and boating."
+    },
+    {
+        "id": 72,
+        "question": "Where can I do trekking in Jharkhand?",
+        "answer": "Trekking is popular in Parasnath Hills and Netarhat."
+    },
+    {
+        "id": 73,
+        "question": "Which airport is closest to major attractions?",
+        "answer": "Birsa Munda Airport in Ranchi is the main airport for tourists."
+    },
+    {
+        "id": 74,
+        "question": "Where is Patratu Valley located?",
+        "answer": "Patratu Valley is located near Ramgarh, close to Ranchi."
+    },
+    {
+        "id": 75,
+        "question": "Which city is known as the Steel City of Jharkhand?",
+        "answer": "Jamshedpur is known as the Steel City of Jharkhand."
+    },
+    {
+        "id": 76,
+        "question": "What are the best tourist places in Jharkhand?",
+        "answer": "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites."
+    },
+    {
+        "id": 77,
+        "question": "What is Jharkhand famous for?",
+        "answer": "Jharkhand is famous for waterfalls, forests, rich minerals, and tribal culture."
+    },
+    {
+        "id": 78,
+        "question": "Which waterfall in Jharkhand is most popular?",
+        "answer": "Hundru Falls and Dassam Falls are among the most popular waterfalls."
+    },
+    {
+        "id": 79,
+        "question": "Where is Dassam Falls located?",
+        "answer": "Dassam Falls is located near Taimara village, around 40 km from Ranchi."
+    },
+    {
+        "id": 80,
+        "question": "What is the best time to visit Jharkhand?",
+        "answer": "The best time to visit Jharkhand is from October to March."
+    },
+    {
+        "id": 81,
+        "question": "Which national parks can I visit in Jharkhand?",
+        "answer": "You can visit Betla National Park, Dalma Wildlife Sanctuary, and Hazaribagh Wildlife Sanctuary."
+    },
+    {
+        "id": 82,
+        "question": "What is special about Betla National Park?",
+        "answer": "Betla National Park is known for tigers, elephants, and dense forests."
+    },
+    {
+        "id": 83,
+        "question": "How can I reach Netarhat from Ranchi?",
+        "answer": "You can reach Netarhat by road from Ranchi via Latehar."
+    },
+    {
+        "id": 84,
+        "question": "Is Jharkhand safe for tourists?",
+        "answer": "Yes, Jharkhand is generally safe for tourists with standard precautions."
+    },
+    {
+        "id": 85,
+        "question": "What is the capital of Jharkhand?",
+        "answer": "The capital of Jharkhand is Ranchi."
+    },
+    {
+        "id": 86,
+        "question": "Which is the highest peak in Jharkhand?",
+        "answer": "Parasnath Hill is the highest peak in Jharkhand."
+    },
+    {
+        "id": 87,
+        "question": "What is Parasnath Hill famous for?",
+        "answer": "Parasnath Hill is a famous Jain pilgrimage site."
+    },
+    {
+        "id": 88,
+        "question": "Which tribe is most common in Jharkhand?",
+        "answer": "The Santhal tribe is one of the major tribes in Jharkhand."
+    },
+    {
+        "id": 89,
+        "question": "What are traditional Jharkhand foods?",
+        "answer": "Popular foods include Dhuska, Rugra, Chhoti Macher Jhor, and Chilka Roti."
+    },
+    {
+        "id": 90,
+        "question": "What is the dance form of Jharkhand?",
+        "answer": "Chhau and Jhumair are popular dance forms of Jharkhand."
+    },
+    {
+        "id": 91,
+        "question": "Which river flows through Ranchi?",
+        "answer": "The Subarnarekha River flows through Ranchi."
+    },
+    {
+        "id": 92,
+        "question": "What is the climate of Jharkhand?",
+        "answer": "Jharkhand has a tropical climate with hot summers and cool winters."
+    },
+    {
+        "id": 93,
+        "question": "Which wildlife sanctuary is near Jamshedpur?",
+        "answer": "Dalma Wildlife Sanctuary is the nearest major sanctuary to Jamshedpur."
+    },
+    {
+        "id": 94,
+        "question": "Where is Dalma Wildlife Sanctuary located?",
+        "answer": "Dalma Wildlife Sanctuary is near Jamshedpur, famous for elephants."
+    },
+    {
+        "id": 95,
+        "question": "What is Johna Falls also known as?",
+        "answer": "Johna Falls is also called Gautamdhara Falls."
+    },
+    {
+        "id": 96,
+        "question": "What adventure activities are available in Jharkhand?",
+        "answer": "Adventure activities include trekking, rock climbing, wildlife safari, and boating."
+    },
+    {
+        "id": 97,
+        "question": "Where can I do trekking in Jharkhand?",
+        "answer": "Trekking is popular in Parasnath Hills and Netarhat."
+    },
+    {
+        "id": 98,
+        "question": "Which airport is closest to major attractions?",
+        "answer": "Birsa Munda Airport in Ranchi is the main airport for tourists."
+    },
+    {
+        "id": 99,
+        "question": "Where is Patratu Valley located?",
+        "answer": "Patratu Valley is located near Ramgarh, close to Ranchi."
+    },
+    {
+        "id": 100,
+        "question": "Which city is known as the Steel City of Jharkhand?",
+        "answer": "Jamshedpur is known as the Steel City of Jharkhand."
+    },
+    {
+        "id": 101,
+        "question": "What are the best tourist places in Jharkhand?",
+        "answer": "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites."
+    },
+    {
+        "id": 102,
+        "question": "What is Jharkhand famous for?",
+        "answer": "Jharkhand is famous for waterfalls, forests, rich minerals, and tribal culture."
+    },
+    {
+        "id": 103,
+        "question": "Which waterfall in Jharkhand is most popular?",
+        "answer": "Hundru Falls and Dassam Falls are among the most popular waterfalls."
+    },
+    {
+        "id": 104,
+        "question": "Where is Dassam Falls located?",
+        "answer": "Dassam Falls is located near Taimara village, around 40 km from Ranchi."
+    },
+    {
+        "id": 105,
+        "question": "What is the best time to visit Jharkhand?",
+        "answer": "The best time to visit Jharkhand is from October to March."
+    },
+    {
+        "id": 106,
+        "question": "Which national parks can I visit in Jharkhand?",
+        "answer": "You can visit Betla National Park, Dalma Wildlife Sanctuary, and Hazaribagh Wildlife Sanctuary."
+    },
+    {
+        "id": 107,
+        "question": "What is special about Betla National Park?",
+        "answer": "Betla National Park is known for tigers, elephants, and dense forests."
+    },
+    {
+        "id": 108,
+        "question": "How can I reach Netarhat from Ranchi?",
+        "answer": "You can reach Netarhat by road from Ranchi via Latehar."
+    },
+    {
+        "id": 109,
+        "question": "Is Jharkhand safe for tourists?",
+        "answer": "Yes, Jharkhand is generally safe for tourists with standard precautions."
+    },
+    {
+        "id": 110,
+        "question": "What is the capital of Jharkhand?",
+        "answer": "The capital of Jharkhand is Ranchi."
+    },
+    {
+        "id": 111,
+        "question": "Which is the highest peak in Jharkhand?",
+        "answer": "Parasnath Hill is the highest peak in Jharkhand."
+    },
+    {
+        "id": 112,
+        "question": "What is Parasnath Hill famous for?",
+        "answer": "Parasnath Hill is a famous Jain pilgrimage site."
+    },
+    {
+        "id": 113,
+        "question": "Which tribe is most common in Jharkhand?",
+        "answer": "The Santhal tribe is one of the major tribes in Jharkhand."
+    },
+    {
+        "id": 114,
+        "question": "What are traditional Jharkhand foods?",
+        "answer": "Popular foods include Dhuska, Rugra, Chhoti Macher Jhor, and Chilka Roti."
+    },
+    {
+        "id": 115,
+        "question": "What is the dance form of Jharkhand?",
+        "answer": "Chhau and Jhumair are popular dance forms of Jharkhand."
+    },
+    {
+        "id": 116,
+        "question": "Which river flows through Ranchi?",
+        "answer": "The Subarnarekha River flows through Ranchi."
+    },
+    {
+        "id": 117,
+        "question": "What is the climate of Jharkhand?",
+        "answer": "Jharkhand has a tropical climate with hot summers and cool winters."
+    },
+    {
+        "id": 118,
+        "question": "Which wildlife sanctuary is near Jamshedpur?",
+        "answer": "Dalma Wildlife Sanctuary is the nearest major sanctuary to Jamshedpur."
+    },
+    {
+        "id": 119,
+        "question": "Where is Dalma Wildlife Sanctuary located?",
+        "answer": "Dalma Wildlife Sanctuary is near Jamshedpur, famous for elephants."
+    },
+    {
+        "id": 120,
+        "question": "What is Johna Falls also known as?",
+        "answer": "Johna Falls is also called Gautamdhara Falls."
+    },
+    {
+        "id": 121,
+        "question": "What adventure activities are available in Jharkhand?",
+        "answer": "Adventure activities include trekking, rock climbing, wildlife safari, and boating."
+    },
+    {
+        "id": 122,
+        "question": "Where can I do trekking in Jharkhand?",
+        "answer": "Trekking is popular in Parasnath Hills and Netarhat."
+    },
+    {
+        "id": 123,
+        "question": "Which airport is closest to major attractions?",
+        "answer": "Birsa Munda Airport in Ranchi is the main airport for tourists."
+    },
+    {
+        "id": 124,
+        "question": "Where is Patratu Valley located?",
+        "answer": "Patratu Valley is located near Ramgarh, close to Ranchi."
+    },
+    {
+        "id": 125,
+        "question": "Which city is known as the Steel City of Jharkhand?",
+        "answer": "Jamshedpur is known as the Steel City of Jharkhand."
+    },
+    {
+        "id": 126,
+        "question": "What are the best tourist places in Jharkhand?",
+        "answer": "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites."
+    },
+    {
+        "id": 127,
+        "question": "What is Jharkhand famous for?",
+        "answer": "Jharkhand is famous for waterfalls, forests, rich minerals, and tribal culture."
+    },
+    {
+        "id": 128,
+        "question": "Which waterfall in Jharkhand is most popular?",
+        "answer": "Hundru Falls and Dassam Falls are among the most popular waterfalls."
+    },
+    {
+        "id": 129,
+        "question": "Where is Dassam Falls located?",
+        "answer": "Dassam Falls is located near Taimara village, around 40 km from Ranchi."
+    },
+    {
+        "id": 130,
+        "question": "What is the best time to visit Jharkhand?",
+        "answer": "The best time to visit Jharkhand is from October to March."
+    },
+    {
+        "id": 131,
+        "question": "Which national parks can I visit in Jharkhand?",
+        "answer": "You can visit Betla National Park, Dalma Wildlife Sanctuary, and Hazaribagh Wildlife Sanctuary."
+    },
+    {
+        "id": 132,
+        "question": "What is special about Betla National Park?",
+        "answer": "Betla National Park is known for tigers, elephants, and dense forests."
+    },
+    {
+        "id": 133,
+        "question": "How can I reach Netarhat from Ranchi?",
+        "answer": "You can reach Netarhat by road from Ranchi via Latehar."
+    },
+    {
+        "id": 134,
+        "question": "Is Jharkhand safe for tourists?",
+        "answer": "Yes, Jharkhand is generally safe for tourists with standard precautions."
+    },
+    {
+        "id": 135,
+        "question": "What is the capital of Jharkhand?",
+        "answer": "The capital of Jharkhand is Ranchi."
+    },
+    {
+        "id": 136,
+        "question": "Which is the highest peak in Jharkhand?",
+        "answer": "Parasnath Hill is the highest peak in Jharkhand."
+    },
+    {
+        "id": 137,
+        "question": "What is Parasnath Hill famous for?",
+        "answer": "Parasnath Hill is a famous Jain pilgrimage site."
+    },
+    {
+        "id": 138,
+        "question": "Which tribe is most common in Jharkhand?",
+        "answer": "The Santhal tribe is one of the major tribes in Jharkhand."
+    },
+    {
+        "id": 139,
+        "question": "What are traditional Jharkhand foods?",
+        "answer": "Popular foods include Dhuska, Rugra, Chhoti Macher Jhor, and Chilka Roti."
+    },
+    {
+        "id": 140,
+        "question": "What is the dance form of Jharkhand?",
+        "answer": "Chhau and Jhumair are popular dance forms of Jharkhand."
+    },
+    {
+        "id": 141,
+        "question": "Which river flows through Ranchi?",
+        "answer": "The Subarnarekha River flows through Ranchi."
+    },
+    {
+        "id": 142,
+        "question": "What is the climate of Jharkhand?",
+        "answer": "Jharkhand has a tropical climate with hot summers and cool winters."
+    },
+    {
+        "id": 143,
+        "question": "Which wildlife sanctuary is near Jamshedpur?",
+        "answer": "Dalma Wildlife Sanctuary is the nearest major sanctuary to Jamshedpur."
+    },
+    {
+        "id": 144,
+        "question": "Where is Dalma Wildlife Sanctuary located?",
+        "answer": "Dalma Wildlife Sanctuary is near Jamshedpur, famous for elephants."
+    },
+    {
+        "id": 145,
+        "question": "What is Johna Falls also known as?",
+        "answer": "Johna Falls is also called Gautamdhara Falls."
+    },
+    {
+        "id": 146,
+        "question": "What adventure activities are available in Jharkhand?",
+        "answer": "Adventure activities include trekking, rock climbing, wildlife safari, and boating."
+    },
+    {
+        "id": 147,
+        "question": "Where can I do trekking in Jharkhand?",
+        "answer": "Trekking is popular in Parasnath Hills and Netarhat."
+    },
+    {
+        "id": 148,
+        "question": "Which airport is closest to major attractions?",
+        "answer": "Birsa Munda Airport in Ranchi is the main airport for tourists."
+    },
+    {
+        "id": 149,
+        "question": "Where is Patratu Valley located?",
+        "answer": "Patratu Valley is located near Ramgarh, close to Ranchi."
+    },
+    {
+        "id": 150,
+        "question": "Which city is known as the Steel City of Jharkhand?",
+        "answer": "Jamshedpur is known as the Steel City of Jharkhand."
+    }
+]
