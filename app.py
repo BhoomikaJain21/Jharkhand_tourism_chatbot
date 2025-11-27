@@ -14,16 +14,15 @@ from sklearn.metrics.pairwise import cosine_similarity
 VECTORIZER_FILE = 'qa_vectorizer.pkl'
 VECTORS_FILE = 'qa_vectors.pkl'
 DATA_FILE = 'qa_data.json'
-SIMILARITY_THRESHOLD = 0.35 
+# FIX: Increased threshold from 0.35 to 0.65 to ensure only high-confidence matches return an answer.
+SIMILARITY_THRESHOLD = 0.65 
 
 # --- Model Loading and Setup ---
 @st.cache_resource
 def load_resources():
     """Loads all necessary components and caches them."""
     
-    # 0. FIX: Ensure NLTK resources are downloaded first,
-    # as the deployed environment might not have them.
-    # These calls are safe and necessary for wordpunct_tokenize and lemmatize.
+    # 0. Ensure NLTK resources are downloaded
     print("Ensuring NLTK resources are downloaded...")
     try:
         nltk.download('punkt', quiet=True)
@@ -95,7 +94,6 @@ def preprocess_text_for_inference(text):
     """Preprocesses a new text query for vectorization (lemmatize, lowercase)."""
     lemmatizer = st.session_state.lemmatizer
     text = re.sub(r'[?]', '', text.lower()) 
-    # Using wordpunct_tokenize to avoid LookupError
     words = nltk.tokenize.wordpunct_tokenize(text)
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
     return ' '.join(lemmatized_words)
@@ -125,7 +123,8 @@ def get_best_response_by_similarity(user_input_en, vectorizer, qa_vectors, answe
     if best_score >= threshold:
         english_response = answers[best_match_index]
     else:
-        english_response = "I am not sure I understand that query. Could you please rephrase or ask a different question about Jharkhand tourism? 😔"
+        # Fallback response for low confidence (now requires a higher score)
+        english_response = "I am not sure I understand that query. I can only answer questions similar to those I was trained on (like 'What is the capital of Jharkhand?'). Could you please rephrase or ask a different question? 😔"
         
     return english_response
 
