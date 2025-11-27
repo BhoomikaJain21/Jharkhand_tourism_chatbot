@@ -7,7 +7,6 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # --- NLTK Downloads ---
-# Ensure all resources are present
 print("Downloading NLTK resources...")
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
@@ -31,6 +30,11 @@ try:
         if question not in unique_qa_map:
             unique_qa_map[question] = answer
             
+    # FIX: Add a specific Q&A pair to capture "famous people" queries 
+    # and manage user expectations within the context of a tourism bot.
+    # This prevents misclassification with "What is Jharkhand famous for?".
+    unique_qa_map["Who are some famous people from Jharkhand?"] = "While Jharkhand has many notable figures, this chatbot focuses exclusively on tourism, culture, and travel information."
+
     questions = list(unique_qa_map.keys())
     answers = list(unique_qa_map.values())
     
@@ -49,12 +53,8 @@ lemmatizer = WordNetLemmatizer()
 
 def preprocess_text(text):
     """Tokenizes, converts to lowercase, and lemmatizes the text."""
-    # Remove punctuation/special characters
     text = re.sub(r'[?]', '', text.lower()) 
-    
-    # FIX: Use wordpunct_tokenize to avoid the 'punkt_tab' LookupError
     words = nltk.tokenize.wordpunct_tokenize(text)
-    
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
     return ' '.join(lemmatized_words)
 

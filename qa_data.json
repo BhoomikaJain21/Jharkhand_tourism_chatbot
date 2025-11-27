@@ -24,7 +24,8 @@
         "Where can I do trekking in Jharkhand?",
         "Which airport is closest to major attractions?",
         "Where is Patratu Valley located?",
-        "Which city is known as the Steel City of Jharkhand?"
+        "Which city is known as the Steel City of Jharkhand?",
+        "Who are some famous people from Jharkhand?"
     ],
     "answers": [
         "Jharkhand is known for waterfalls, forests, hills, wildlife sanctuaries, and cultural sites.",
@@ -51,6 +52,7 @@
         "Trekking is popular in Parasnath Hills and Netarhat.",
         "Birsa Munda Airport in Ranchi is the main airport for tourists.",
         "Patratu Valley is located near Ramgarh, close to Ranchi.",
-        "Jamshedpur is known as the Steel City of Jharkhand."
+        "Jamshedpur is known as the Steel City of Jharkhand.",
+        "While Jharkhand has many notable figures, this chatbot focuses exclusively on tourism, culture, and travel information."
     ]
 }
