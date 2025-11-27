@@ -37,12 +37,12 @@ MASTER_ANSWERS = {
 # Manually assign Intents to each question in the dataset for supervised training
 def assign_intent(question):
     q = question.lower()
-    if 'best tourist places' in q or 'famous for' in q: return 'overview'
+    if 'best tourist places' in q or 'famous for' in q or 'what is' in q: return 'overview'
     if 'waterfall' in q or 'johna falls' in q: return 'waterfalls'
     if 'national park' in q or 'betla' in q or 'dalma' in q or 'hazaribagh' in q: return 'wildlife'
     if 'time to visit' in q or 'season' in q or 'climate' in q: return 'best_time'
     if 'where is' in q or 'located' in q or 'patratu valley' in q: return 'location'
-    if 'reach' in q or 'safe' in q or 'airport' in q: return 'logistics'
+    if 'reach' in q or 'safe' in q or 'airport' in q or 'how to' in q: return 'logistics'
     if 'tribe' in q or 'food' in q or 'dance form' in q: return 'culture'
     if 'capital' in q or 'steel city' in q or 'river' in q: return 'cities'
     if 'peak' in q or 'parasnath' in q or 'climate' in q: return 'terrain'

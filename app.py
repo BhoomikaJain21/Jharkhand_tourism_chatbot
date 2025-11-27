@@ -16,7 +16,10 @@ VECTORIZER_FILE = 'lr_vectorizer.pkl'
 MODEL_FILE = 'lr_model.pkl'
 LE_FILE = 'lr_label_encoder.pkl'
 DATA_FILE = 'lr_intent_answers.json'
-CONFIDENCE_THRESHOLD = 0.70 # Use a high threshold for classification to avoid random answers
+# FIX: Lowered threshold from 0.70 to 0.40. This allows the model to predict 
+# the correct intent without being overly strict on confidence, solving the
+# "I am not sure" problem for valid queries.
+CONFIDENCE_THRESHOLD = 0.40 
 
 # --- Model Loading and Setup ---
 @st.cache_resource
@@ -34,19 +37,19 @@ def load_resources():
         st.stop()
     
     try:
-        # 1. Load Intent Answers (Must be committed to GitHub)
+        # 1. Load Intent Answers
         with open(DATA_FILE, 'r', encoding='utf-8') as f:
             intent_answers = json.load(f)
 
-        # 2. Load Vectorizer (Must be committed to GitHub)
+        # 2. Load Vectorizer
         with open(VECTORIZER_FILE, 'rb') as file:
             vectorizer = pickle.load(file)
 
-        # 3. Load Model (Must be committed to GitHub)
+        # 3. Load Model
         with open(MODEL_FILE, 'rb') as file:
             model = pickle.load(file)
             
-        # 4. Load Label Encoder (Must be committed to GitHub)
+        # 4. Load Label Encoder
         with open(LE_FILE, 'rb') as file:
             le = pickle.load(file)
         
@@ -57,7 +60,7 @@ def load_resources():
         return vectorizer, model, le, intent_answers, translator, lemmatizer
 
     except FileNotFoundError:
-        st.error("Model files not found. Please run `train_lr_classifier.py` and commit the files (lr_vectorizer.pkl, lr_model.pkl, etc.) to your GitHub repository.")
+        st.error("Model files not found. Please run `train_lr_classifier.py` and commit the model files to your GitHub repository.")
         st.stop()
     except Exception as e:
         st.error(f"Error loading model resources: {e}")
@@ -112,26 +115,21 @@ def get_lr_response(user_input_en, vectorizer, model, le, intent_answers, thresh
     user_vec = vectorizer.transform([lemmatized_input])
     
     # 2. Predict Intent and Confidence
-    # Get probability distribution for all classes
     probabilities = model.predict_proba(user_vec)[0]
-    
-    # Find the best prediction
     best_prob_index = np.argmax(probabilities)
     best_score = probabilities[best_prob_index]
     predicted_intent = le.classes_[best_prob_index]
     
     # 3. Determine Response based on Confidence
     if best_score >= threshold:
-        # Retrieve the static answer for the predicted intent
         english_response = intent_answers.get(predicted_intent, "Error: Could not find answer for that intent.")
     else:
-        # Fallback response for low confidence
         english_response = "I am not sure I understand that query. I can only answer questions related to Jharkhand tourism topics like waterfalls, wildlife, or logistics. Could you please rephrase?"
         
     return english_response
 
 # --- Streamlit App ---
-st.title("🗺️ Multilingual Jharkhand Tourism Chatbot")
+st.title("🗺️ Multilingual Jharkhand Tourism Chatbot (Logistic Regression)")
 st.markdown("Ask your question in English, Hindi, or any other major language! 🚀")
 
 # Load resources
