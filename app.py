@@ -1,3 +1,4 @@
+%%writefile app.py
 import streamlit as st
 import pickle
 import json
@@ -9,8 +10,6 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import csr_matrix
 from sklearn.metrics.pairwise import cosine_similarity
-# Import the specific exception to fix the deployment error
-from nltk.downloader import DownloadError 
 
 # --- Configuration ---
 VECTORIZER_FILE = 'qa_vectorizer.pkl'
@@ -18,35 +17,38 @@ VECTORS_FILE = 'qa_vectors.pkl'
 DATA_FILE = 'qa_data.json'
 SIMILARITY_THRESHOLD = 0.35 
 
-# --- Ensure NLTK resources are available ---
-# We check and download the necessary resources when the app starts.
-try:
-    nltk.data.find('tokenizers/punkt')
-except DownloadError: # FIXED: Catch the directly imported DownloadError
-    nltk.download('punkt', quiet=True)
-try:
-    nltk.data.find('corpora/wordnet')
-except DownloadError: # FIXED: Catch the directly imported DownloadError
-    nltk.download('wordnet', quiet=True)
-
-
 # --- Model Loading and Setup ---
 @st.cache_resource
 def load_resources():
     """Loads all necessary components and caches them."""
+    
+    # 0. FIX: Ensure NLTK resources are downloaded first,
+    # as the deployed environment might not have them.
+    # These calls are safe and necessary for wordpunct_tokenize and lemmatize.
+    print("Ensuring NLTK resources are downloaded...")
     try:
-        # 1. Load QA Data
+        nltk.download('punkt', quiet=True)
+        nltk.download('wordnet', quiet=True)
+        nltk.download('stopwords', quiet=True)
+        print("NLTK downloads successful.")
+    except Exception as e:
+        print(f"NLTK download failed: {e}")
+        st.error("Failed to download necessary NLP resources. Please check dependencies.")
+        st.stop()
+    
+    try:
+        # 1. Load QA Data (Must be committed to GitHub)
         with open(DATA_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
             questions = data['questions']
             answers = data['answers']
             st.session_state.qa_map = {q: a for q, a in zip(questions, answers)}
 
-        # 2. Load Vectorizer
+        # 2. Load Vectorizer (Must be committed to GitHub)
         with open(VECTORIZER_FILE, 'rb') as file:
             vectorizer = pickle.load(file)
 
-        # 3. Load QA Vectors (The training data)
+        # 3. Load QA Vectors (Must be committed to GitHub)
         with open(VECTORS_FILE, 'rb') as file:
             qa_vectors = pickle.load(file)
         
@@ -57,10 +59,10 @@ def load_resources():
         return vectorizer, qa_vectors, answers, translator, lemmatizer
 
     except FileNotFoundError:
-        st.error("Model files not found. Please run `train_qa_matcher.py` locally first.")
+        st.error("Model files not found. Ensure qa_vectorizer.pkl, qa_vectors.pkl, and qa_data.json are in your GitHub repository.")
         st.stop()
     except Exception as e:
-        st.error(f"Error loading resources: {e}")
+        st.error(f"Error loading model resources: {e}")
         st.stop()
 
 # --- Utility Functions ---
@@ -94,6 +96,7 @@ def preprocess_text_for_inference(text):
     """Preprocesses a new text query for vectorization (lemmatize, lowercase)."""
     lemmatizer = st.session_state.lemmatizer
     text = re.sub(r'[?]', '', text.lower()) 
+    # Using wordpunct_tokenize to avoid LookupError
     words = nltk.tokenize.wordpunct_tokenize(text)
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
     return ' '.join(lemmatized_words)
@@ -129,7 +132,7 @@ def get_best_response_by_similarity(user_input_en, vectorizer, qa_vectors, answe
 
 # --- Streamlit App ---
 st.title("🗺️ Multilingual Jharkhand Tourism Chatbot (Retrieval Model)")
-st.markdown("Ask your question in English, Hindi, or any other major language!")
+st.markdown("Ask your question in English, Hindi, or any other major language! 🚀")
 
 # Load resources (must be before the main chat logic)
 vectorizer, qa_vectors, answers, translator, lemmatizer = load_resources()
