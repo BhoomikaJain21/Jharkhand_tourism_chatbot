@@ -9,6 +9,8 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import csr_matrix
 from sklearn.metrics.pairwise import cosine_similarity
+# Import the specific exception to fix the deployment error
+from nltk.downloader import DownloadError 
 
 # --- Configuration ---
 VECTORIZER_FILE = 'qa_vectorizer.pkl'
@@ -20,11 +22,11 @@ SIMILARITY_THRESHOLD = 0.35
 # We check and download the necessary resources when the app starts.
 try:
     nltk.data.find('tokenizers/punkt')
-except nltk.downloader.DownloadError:
+except DownloadError: # FIXED: Catch the directly imported DownloadError
     nltk.download('punkt', quiet=True)
 try:
     nltk.data.find('corpora/wordnet')
-except nltk.downloader.DownloadError:
+except DownloadError: # FIXED: Catch the directly imported DownloadError
     nltk.download('wordnet', quiet=True)
 
 
@@ -55,7 +57,7 @@ def load_resources():
         return vectorizer, qa_vectors, answers, translator, lemmatizer
 
     except FileNotFoundError:
-        st.error("Model files not found. Please run `train_qa_matcher.py` first.")
+        st.error("Model files not found. Please run `train_qa_matcher.py` locally first.")
         st.stop()
     except Exception as e:
         st.error(f"Error loading resources: {e}")
@@ -92,7 +94,6 @@ def preprocess_text_for_inference(text):
     """Preprocesses a new text query for vectorization (lemmatize, lowercase)."""
     lemmatizer = st.session_state.lemmatizer
     text = re.sub(r'[?]', '', text.lower()) 
-    # FIX: Use wordpunct_tokenize to avoid the 'punkt_tab' LookupError
     words = nltk.tokenize.wordpunct_tokenize(text)
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
     return ' '.join(lemmatized_words)
