@@ -129,7 +129,7 @@ def get_best_response_by_similarity(user_input_en, vectorizer, qa_vectors, answe
     return english_response
 
 # --- Streamlit App ---
-st.title("🗺️ Multilingual Jharkhand Tourism Chatbot (Retrieval Model)")
+st.title("🗺️ Multilingual Jharkhand Tourism Chatbot")
 st.markdown("Ask your question in English, Hindi, or any other major language! 🚀")
 
 # Load resources (must be before the main chat logic)
