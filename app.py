@@ -131,7 +131,7 @@ def get_lr_response(user_input_en, vectorizer, model, le, intent_answers, thresh
     return english_response
 
 # --- Streamlit App ---
-st.title("🗺️ Multilingual Jharkhand Tourism Chatbot (Logistic Regression)")
+st.title("🗺️ Multilingual Jharkhand Tourism Chatbot")
 st.markdown("Ask your question in English, Hindi, or any other major language! 🚀")
 
 # Load resources
