@@ -23,16 +23,14 @@ try:
         
     print(f"Loaded {len(qa_dataset)} total entries from {DATA_FILE}")
 
-    # Deduplicate the dataset
+    # Deduplicate the dataset 
     for item in qa_dataset:
         question = item['question'].strip()
         answer = item['answer'].strip()
         if question not in unique_qa_map:
             unique_qa_map[question] = answer
             
-    # FIX: Add a specific Q&A pair to capture "famous people" queries 
-    # and manage user expectations within the context of a tourism bot.
-    # This prevents misclassification with "What is Jharkhand famous for?".
+    # FIX: Add a specific Q&A pair to capture "famous people" queries.
     unique_qa_map["Who are some famous people from Jharkhand?"] = "While Jharkhand has many notable figures, this chatbot focuses exclusively on tourism, culture, and travel information."
 
     questions = list(unique_qa_map.keys())
